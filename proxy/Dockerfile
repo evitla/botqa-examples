@@ -1,7 +1,15 @@
 FROM nginx:1.23.0-alpine
 
-COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY ./nginx/* /etc/nginx/
 
-EXPOSE 80
+COPY ./run.sh /run.sh
 
-CMD [ "nginx-debug", "-g", "daemon off;" ]
+USER root
+
+RUN apk add --no-cache openssl bash
+
+RUN chmod +x /run.sh
+
+VOLUME /var/www
+
+CMD [ "/run.sh" ]

@@ -12,7 +12,28 @@ services:
     container_name: proxy
     build: ./proxy
     restart: always
+    volumes:
+      - certbot-web:/var/www
+      - proxy-dhparams:/var/proxy
+      - certbot-certs:/etc/nginx/certs
     ports:
       - 80:80
     depends_on:
       - nextjs
+
+  certbot:
+    container_name: certbot
+    build: ./certbot
+    environment:
+      - EMAIL=${ACME_DEFAULT_EMAIL}
+      - DOMAIN=${DOMAIN}
+    volumes:
+      - certbot-web:/var/www
+      - certbot-certs:/etc/nginx/certs
+    depends_on:
+      - proxy
+
+volumes:
+  certbot-web:
+  proxy-dhparams:
+  certbot-certs:
