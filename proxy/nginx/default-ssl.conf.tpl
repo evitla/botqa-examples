@@ -24,15 +24,10 @@ server {
 
   add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
 
-  proxy_set_header Upgrade $http_upgrade;
-  proxy_set_header Connection "upgrade";
-
-  location /_next/webpack_hmr {
-    proxy_pass nextjs:3000/_next/webpack-hmr;
-  }
-
   location / {
-    proxy_pass nextjs:3000;
-    client_max_body_size 20M;
+    proxy_pass http://nextjs:3000;
+    
+    proxy_http_version 1.1;
+    include /etc/nginx/proxy_params;
   }
 }
