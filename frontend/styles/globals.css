@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+body > div:first-child {
+    height: 100%;
+    cursor: none;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+}
+
+a, label, button {
+    cursor: none;
+}
+
+/* hide scrollbar for IE, Edge and Firefox */
+.hidden-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* hide scrollbar for chrome, safari and opera */
+.hidden-scrollbar::-webkit-scrollbar {
+    display: none;
+}
