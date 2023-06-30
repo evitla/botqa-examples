@@ -10,6 +10,4 @@ RUN apk add --no-cache openssl bash
 
 RUN chmod +x /run.sh
 
-VOLUME /var/www
-
 CMD [ "/run.sh" ]
