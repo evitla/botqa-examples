@@ -13,7 +13,6 @@ services:
     build: ./proxy
     restart: always
     volumes:
-      - proxy-dhparams:/var/proxy
       - ssl-certs:/etc/nginx/certs
       - web:/var/www
     ports:
@@ -23,6 +22,5 @@ services:
       - frontend
 
 volumes:
-  proxy-dhparams:
   ssl-certs:
   web:
