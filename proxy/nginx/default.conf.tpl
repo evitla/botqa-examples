@@ -5,7 +5,7 @@ server {
   ssl_certificate /etc/nginx/certs/localhost.crt;
   ssl_certificate_key /etc/nginx/certs/localhost.key;
 
-  add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+  add_header Strict-Transport-Security "max-age=31536000" always;
 
   location / {
     proxy_pass http://frontend:3000;
