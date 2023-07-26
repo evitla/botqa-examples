@@ -2,12 +2,6 @@
 
 set -e
 
-echo "Checking for dhparams.pem"
-if [ ! -f "/var/proxy/ssl-dhparams.pem" ]; then
-  echo "dhparams.pem does not exist - creating it"
-  openssl dhparam -out /var/proxy/ssl-dhparams.pem 2048
-fi
-
 echo "Checking for localhost.crt"
 if [ ! -f "/etc/nginx/certs/localhost.crt" ]; then
   echo "No SSL cert - creating it"
