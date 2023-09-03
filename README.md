@@ -1,3 +1,3 @@
-# nextjs-https
+# botqa-examples
 
-Link to post: https://botqa.xyz/en/posts/https-wild-west
+Link to our botqa posts: https://botqa.xyz
