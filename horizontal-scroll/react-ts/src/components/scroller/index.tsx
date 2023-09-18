@@ -1,5 +1,3 @@
-import { useEffect, useRef } from 'react'
-
 import styles from './index.module.css'
 
 type Props = {
@@ -15,36 +13,30 @@ export default function Scroller({
   scrollRate = 0.5,
   className = '',
 }: Props) {
-  const ref = useRef<HTMLDivElement>(null)
+  function handleScroll(scrollRate: number) {
+    return (e: React.WheelEvent) => {
+      if (direction === 'vertical') return
 
-  useEffect(() => {
-    const target = ref.current
-    if (!target || direction === 'vertical') return
+      const container = e.currentTarget
 
-    const onWheel = (e: WheelEvent) => {
-      e.preventDefault()
-
-      const isReachedRight = target.scrollLeft === 0
+      const isReachedRight = container.scrollLeft === 0
 
       const isReachedLeft =
-        target.scrollWidth - target.getBoundingClientRect().width === target.scrollLeft
+        container.scrollWidth - container.getBoundingClientRect().width === container.scrollLeft
 
-      if (!isReachedRight && !isReachedLeft) e.stopPropagation()
-
-      target.scrollLeft += e.deltaY * scrollRate
-      target.scrollLeft += e.deltaX * scrollRate
+      if (!isReachedRight && !isReachedLeft) {
+        e.preventDefault()
+        e.stopPropagation()
+      }
+      
+      container.scrollLeft += e.deltaY * scrollRate
+      container.scrollLeft += e.deltaX * scrollRate
     }
-
-    target.addEventListener('wheel', onWheel)
-
-    return () => {
-      target.removeEventListener('wheel', onWheel)
-    }
-  }, [direction, scrollRate])
-
+  }
+  
   return (
     <div
-      ref={ref}
+      onWheel={handleScroll(scrollRate)}
       className={`
         hidden-scrollbar 
         ${styles.base} 
