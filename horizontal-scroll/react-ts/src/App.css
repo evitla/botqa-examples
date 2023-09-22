@@ -1,0 +1,28 @@
+.page {
+  flex: 0 0 100%;
+  height: calc(100vh - 20px);
+}
+
+.page-1 {
+  background-color: coral;
+  display: grid;
+  place-content: center;
+}
+
+.page-2 {
+  background-color: rgb(51, 23, 136);
+}
+
+.slider {
+  width: 700px;
+  height: 400px;
+  border-radius: 6px;
+  background-color: red;
+  gap: 10px;
+  padding: 10px;
+}
+
+.slide {
+  background-color: yellow;
+  flex: 0 0 90%;
+}
