@@ -18,22 +18,22 @@ export default function Scroller({
       if (direction === 'vertical') return
 
       const container = e.currentTarget
+      const containerWidth = container.getBoundingClientRect().width
 
-      const isReachedRight = container.scrollLeft === 0
+      const isReachedLeftEdge = container.scrollLeft === 0
 
-      const isReachedLeft =
-        container.scrollWidth - container.getBoundingClientRect().width === container.scrollLeft
+      const isReachedRightEdge = container.scrollLeft === container.scrollWidth - containerWidth
 
-      if (!isReachedRight && !isReachedLeft) {
+      if (!isReachedLeftEdge && !isReachedRightEdge) {
         e.preventDefault()
         e.stopPropagation()
       }
-      
+
       container.scrollLeft += e.deltaY * scrollRate
       container.scrollLeft += e.deltaX * scrollRate
     }
   }
-  
+
   return (
     <div
       onWheel={handleScroll(scrollRate)}

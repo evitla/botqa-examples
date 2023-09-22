@@ -8,16 +8,17 @@ document
 
 function handleScroll(scrollRate = 0.5) {
   return (e) => {
-    e.preventDefault()
-
     const container = e.currentTarget
+    const containerWidth = container.getBoundingClientRect().width
 
-    const isReachedRight = container.scrollLeft === 0
+    const isReachedLeftEdge = container.scrollLeft === 0
 
-    const isReachedLeft =
-      container.scrollWidth - container.getBoundingClientRect().width === container.scrollLeft
+    const isReachedRightEdge = container.scrollLeft === container.scrollWidth - containerWidth
 
-    if (!isReachedRight && !isReachedLeft) e.stopPropagation()
+    if (!isReachedLeftEdge && !isReachedRightEdge) {
+      e.preventDefault()
+      e.stopPropagation()
+    }
     
     container.scrollLeft += e.deltaY * scrollRate
     container.scrollLeft += e.deltaX * scrollRate
